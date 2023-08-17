@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/MenuFragment">
+
+    <fragment
+        android:id="@+id/MenuFragment"
+        android:name="com.example.czolko.MenuFragment"
+        android:label="@string/menu_fragment_label"
+        tools:layout="@layout/fragment_menu">
+
+        <action
+            android:id="@+id/action_MenuFragment_to_PlayFragment"
+            app:destination="@id/PlayFragment" />
+        <action
+            android:id="@+id/action_MenuFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PlayFragment"
+        android:name="com.example.czolko.PlayFragment"
+        android:label="@string/play_fragment_label"
+        tools:layout="@layout/fragment_play">
+
+        <action
+            android:id="@+id/action_PlayFragment_to_MenuFragment"
+            app:destination="@id/MenuFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.example.czolko.SettingsFragment"
+        android:label="@string/settings_fragment_label"
+        tools:layout="@layout/fragment_settings">
+
+        <action
+            android:id="@+id/action_SettingsFragment_to_MenuFragment"
+            app:destination="@id/MenuFragment" />
+    </fragment>
+</navigation>
