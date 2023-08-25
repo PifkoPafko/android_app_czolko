@@ -47,6 +47,7 @@ class PlayFragment : Fragment() {
         val buttonGoodAnswer = binding.buttonGoodAnswer
         val buttonBadAnswer = binding.buttonBadAnswer
         val viewSeparateLine = binding.viewSeparateLine
+        val titleText = binding.textTitle
 
         val roundTimer = object: CountDownTimer(30000, 1000) {
 
@@ -71,6 +72,8 @@ class PlayFragment : Fragment() {
                 buttonGoodAnswer.visibility = View.VISIBLE
                 buttonBadAnswer.visibility = View.VISIBLE
                 viewSeparateLine.visibility = View.VISIBLE
+                titleText.text = SongsParsed.getSongs().songs[0].title
+
             }
         }
 

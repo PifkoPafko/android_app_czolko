@@ -13,11 +13,11 @@ def write_to_json(strings, output_file):
         for string in strings:
             list_of_song_sets.append({"isSanah" : False, "isOtherShit" : False, "title" : string})
         json_data = {"songs" : list_of_song_sets}
-        json.dump(json_data, file, indent=4)
+        json.dump(json_data, file, ensure_ascii=False, indent=4)
 
 # Input and output file paths
 input_file = 'NewSongList.txt'
-output_file = 'songs.json'
+output_file = '.\\app\\src\\main\\assets\\songs_data.json'
 
 # Read the text file into a list of strings
 strings = read_text_file(input_file)

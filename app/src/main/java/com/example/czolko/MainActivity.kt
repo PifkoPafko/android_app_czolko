@@ -1,13 +1,13 @@
 package com.example.czolko
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import android.view.Menu
 import com.example.czolko.databinding.ActivityMainBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,5 +19,24 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val jsonFileString = Utils.getJsonDataFromAsset(applicationContext, "songs_data.json")!!
+        val gson = Gson()
+        val listPersonType = object : TypeToken<SongsData>() {}.type
+        var songsList: SongsData = gson.fromJson(jsonFileString, listPersonType)
+
+        SongsParsed.setSongs(songsList)
+    }
+}
+
+object SongsParsed {
+    private var songs: SongsData = SongsData(mutableListOf())
+
+    fun setSongs (songsList: SongsData) {
+        songs = songsList
+    }
+
+    fun getSongs () : SongsData {
+        return songs
     }
 }

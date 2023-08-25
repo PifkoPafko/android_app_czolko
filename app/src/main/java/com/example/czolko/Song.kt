@@ -1,7 +1,7 @@
 package com.example.czolko
 
-class Song {
-    val isSanah = false
-    val isOtherShit = false
-    val title = ""
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Song (val isSanah: Boolean, val isOtherShit: Boolean, val title: String){
 }
