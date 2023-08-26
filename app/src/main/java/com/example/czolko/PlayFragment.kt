@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.czolko.databinding.FragmentPlayBinding
+import com.google.android.material.textview.MaterialTextView
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -21,14 +22,22 @@ class PlayFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    inner class PlayBindings {
+        val buttonGoBack = binding.buttonGoBack
+        val buttonNext = binding.buttonNext
+        val buttonGoodAnswer = binding.buttonGoodAnswer
+        val buttonBadAnswer = binding.buttonBadAnswer
+        val timerText = binding.timerText
+        val viewSeparateLine = binding.viewSeparateLine
+        val textTitle = binding.textTitle
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-
-
         _binding = FragmentPlayBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -37,47 +46,26 @@ class PlayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonGoBack.setOnClickListener {
+        val playBindings = PlayBindings()
+        val game = Game(playBindings, SettingsParsed)
+
+        playBindings.buttonGoBack.setOnClickListener {
             findNavController().navigate(R.id.action_PlayFragment_to_MenuFragment)
         }
 
-        val timerText = binding.timerText
-        val buttonGoBack = binding.buttonGoBack
-        val buttonNext = binding.buttonNext
-        val buttonGoodAnswer = binding.buttonGoodAnswer
-        val buttonBadAnswer = binding.buttonBadAnswer
-        val viewSeparateLine = binding.viewSeparateLine
-        val titleText = binding.textTitle
-
-        val roundTimer = object: CountDownTimer(30000, 1000) {
-
-            override fun onTick(millisUntilFinished: Long) {
-                timerText.text = (millisUntilFinished/1000).toString()
-            }
-
-            override fun onFinish() {
-                timerText.text = ""
-                buttonNext.visibility = View.VISIBLE
-            }
+        playBindings.buttonGoodAnswer.setOnClickListener {
+            game.nextRound(true)
         }
 
-        val startTimer = object: CountDownTimer(5000, 1000) {
-
-            override fun onTick(millisUntilFinished: Long) {
-                timerText.text = (millisUntilFinished/1000).toString()
-            }
-
-            override fun onFinish() {
-                roundTimer.start()
-                buttonGoodAnswer.visibility = View.VISIBLE
-                buttonBadAnswer.visibility = View.VISIBLE
-                viewSeparateLine.visibility = View.VISIBLE
-                titleText.text = SongsParsed.getSongs().songs[0].title
-
-            }
+        playBindings.buttonBadAnswer.setOnClickListener {
+            game.nextRound(false)
         }
 
-        startTimer.start()
+        playBindings.buttonNext.setOnClickListener {
+            game.nextRound(false)
+        }
+
+        game.startGame()
     }
 
     override fun onDestroyView() {

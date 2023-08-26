@@ -12,7 +12,7 @@
     <string name="go_back">Wróć</string>
     <string name="go_next">Następny</string>
     <string name="good_answer">Dobrze!</string>
-    <string name="bad_answer">Źle:/</string>
+    <string name="skip_answer">Pomiń:/</string>
     <string name="get_ready">Przygotuj się!</string>
     <string name="save">Zapisz</string>
 </resources>

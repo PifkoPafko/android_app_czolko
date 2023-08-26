@@ -20,12 +20,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val jsonFileString = Utils.getJsonDataFromAsset(applicationContext, "songs_data.json")!!
-        val gson = Gson()
-        val listPersonType = object : TypeToken<SongsData>() {}.type
-        var songsList: SongsData = gson.fromJson(jsonFileString, listPersonType)
+        val songsJsonString = Utils.getJsonDataFromAsset(applicationContext, "songs_data.json")!!
+        val songsGson = Gson()
+        val songsType = object : TypeToken<SongsData>() {}.type
+        var songsData: SongsData = songsGson.fromJson(songsJsonString, songsType)
+        SongsParsed.setSongs(songsData)
 
-        SongsParsed.setSongs(songsList)
+        val settingsJsonString = Utils.getJsonDataFromAsset(applicationContext, "settings_data.json")!!
+        val settingsGson = Gson()
+        val settingsType = object : TypeToken<SettingsData>() {}.type
+        var settingsData: SettingsData = settingsGson.fromJson(settingsJsonString, settingsType)
+        SettingsParsed.setSettings(settingsData)
     }
 }
 
@@ -38,5 +43,18 @@ object SongsParsed {
 
     fun getSongs () : SongsData {
         return songs
+    }
+}
+
+object SettingsParsed {
+    private var settings: SettingsData = SettingsData(0, 0)
+
+    fun setSettings (dataSettings: SettingsData) {
+        settings.roundTime = dataSettings.roundTime
+        settings.roundAmount = dataSettings.roundAmount
+    }
+
+    fun getSettings () : SettingsData {
+        return settings
     }
 }

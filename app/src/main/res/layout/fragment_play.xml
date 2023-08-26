@@ -36,12 +36,12 @@
         android:visibility="gone"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_good_answer"
+        android:id="@+id/button_bad_answer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.495"
         app:layout_constraintHeight_percent="1"
-        android:text="@string/good_answer"
+        android:text="@string/skip_answer"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,12 +51,12 @@
         android:visibility="gone"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_bad_answer"
+        android:id="@+id/button_good_answer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.495"
         app:layout_constraintHeight_percent="1"
-        android:text="@string/bad_answer"
+        android:text="@string/good_answer"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
